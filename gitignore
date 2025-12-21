@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+
+# Node & React
+node_modules/
+dist/
+.env.local
+.env*
+
+# System
+.DS_Store
+.vscode/
+*.log
+
+# Data / Models
+healing_audit.log
+
+# Prometheus
+prometheus
+promtool
+data/
+wal/

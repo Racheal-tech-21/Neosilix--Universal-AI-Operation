@@ -1,0 +1,20 @@
+<!-- dashboard/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Neosilix Copilot</title>
+</head>
+<body>
+  <h1>Universal AI Ops Copilot</h1>
+  <button onclick="runDetection()">Run Detection</button>
+  <pre id="result"></pre>
+
+  <script>
+    async function runDetection() {
+      const res = await fetch('http://localhost:5000/detect');
+      const data = await res.json();
+      document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>

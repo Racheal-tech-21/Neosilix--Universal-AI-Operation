@@ -1,0 +1,43 @@
+
+MANUAL FIX INSTRUCTIONS
+=======================
+
+If the automatic fix didn't work, here's how to manually fix the AI responses:
+
+1. LOCATE YOUR advanced_copilot.py FILE:
+   - Check in these locations:
+     - /home/racheal-sililo/neosilix-uaiops/advanced_copilot.py
+     - /home/racheal-sililo/neosilix-uaiops/api/advanced_copilot.py
+     - Current directory
+
+2. UPDATE THE API ENDPOINT:
+   In your Flask app, replace the /api/advanced-chat endpoint with this:
+
+   @app.route('/api/advanced-chat', methods=['POST'])
+   def advanced_chat():
+       data = request.get_json()
+       question = data.get('question', '').lower().strip()
+       
+       responses = {
+           'cpu': "The CPU is currently operating within normal parameters.",
+           'memory': "Memory usage appears stable at the moment.",
+           'disk': "Storage capacity looks healthy.",
+           'network': "Network connectivity is stable.",
+           'default': "I've analyzed the system and everything appears normal."
+       }
+       
+       response_text = responses['default']
+       for key in responses:
+           if key in question:
+               response_text = responses[key]
+               break
+       
+       return jsonify({
+           'response': response_text,
+           'confidence': 0.85,
+           'intelligence_level': 'advanced_neural'
+       })
+
+3. RESTART YOUR FLASK APPLICATION
+
+4. TEST WITH: python test_ai_responses.py

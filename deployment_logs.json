@@ -1,0 +1,142 @@
+[
+    {
+        "timestamp": "2025-08-20 14:20:24",
+        "metric": "CI/CD",
+        "action": "Pulling latest code",
+        "status": "STARTED",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-08-20 14:20:27",
+        "metric": "CI/CD",
+        "action": "Pulled latest code",
+        "status": "FAILED",
+        "details": "From https://github.com/Racheal-tech-21/Neosilix-UAIOps\n * branch            main       -> FETCH_HEAD\nhint: You have divergent branches and need to specify how to reconcile them.\nhint: You can do so by running one of the following commands sometime before\nhint: your next pull:\nhint: \nhint:   git config pull.rebase false  # merge\nhint:   git config pull.rebase true   # rebase\nhint:   git config pull.ff only       # fast-forward only\nhint: \nhint: You can replace \"git config\" with \"git config --global\" to set a default\nhint: preference for all repositories. You can also pass --rebase, --no-rebase,\nhint: or --ff-only on the command line to override the configured default per\nhint: invocation.\nfatal: Need to specify how to reconcile divergent branches."
+    },
+    {
+        "timestamp": "2025-08-20 14:20:27",
+        "metric": "CI/CD",
+        "action": "Building Docker image",
+        "status": "STARTED",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-08-20 14:21:01",
+        "metric": "CI/CD",
+        "action": "Docker build",
+        "status": "SUCCESS",
+        "details": "Sending build context to Docker daemon   1.03GB\n\nStep 1/3 : FROM python:3.12-slim\n ---> bad5eac7befe\nStep 2/3 : WORKDIR /app\n ---> Using cache\n ---> 7afa802c0c75\nStep 3/3 : CMD [\"echo\", \"Neosilix test container running\"]\n ---> Running in 5269c70b4948\n ---> Removed intermediate container 5269c70b4948\n ---> 06acf6913155\nSuccessfully built 06acf6913155\nSuccessfully tagged neosilix-app:v1.0.0"
+    },
+    {
+        "timestamp": "2025-08-20 14:21:01",
+        "metric": "CI/CD",
+        "action": "Restarting container",
+        "status": "STARTED",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-08-20 14:21:03",
+        "metric": "CI/CD",
+        "action": "Docker restart",
+        "status": "SUCCESS",
+        "details": "#1 [neosilix-app internal] load build definition from dockerfile\n#1 transferring dockerfile: 120B done\n#1 DONE 0.0s\n\n#2 [neosilix-app internal] load metadata for docker.io/library/python:3.12-slim\n#2 DONE 0.0s\n\n#3 [neosilix-app internal] load .dockerignore\n#3 transferring context: 2B done\n#3 DONE 0.0s\n\n#4 [neosilix-app 1/2] FROM docker.io/library/python:3.12-slim\n#4 CACHED\n\n#5 [neosilix-app 2/2] WORKDIR /app\n#5 DONE 0.1s\n\n#6 [neosilix-app] exporting to image\n#6 exporting layers 0.0s done\n#6 writing image sha256:8a7a48055f6fde48bc324137d604f08e1a4e06b3030924e58a039697ec38371b done\n#6 naming to docker.io/library/neosilix-uaiops-neosilix-app done\n#6 DONE 0.1s"
+    },
+    {
+        "timestamp": "2025-08-20 14:21:03",
+        "metric": "CI/CD",
+        "action": "Pulling latest code",
+        "status": "STARTED",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-08-20 14:21:05",
+        "metric": "CI/CD",
+        "action": "Pulled latest code",
+        "status": "FAILED",
+        "details": "From https://github.com/Racheal-tech-21/Neosilix-UAIOps\n * branch            main       -> FETCH_HEAD\nhint: You have divergent branches and need to specify how to reconcile them.\nhint: You can do so by running one of the following commands sometime before\nhint: your next pull:\nhint: \nhint:   git config pull.rebase false  # merge\nhint:   git config pull.rebase true   # rebase\nhint:   git config pull.ff only       # fast-forward only\nhint: \nhint: You can replace \"git config\" with \"git config --global\" to set a default\nhint: preference for all repositories. You can also pass --rebase, --no-rebase,\nhint: or --ff-only on the command line to override the configured default per\nhint: invocation.\nfatal: Need to specify how to reconcile divergent branches."
+    },
+    {
+        "timestamp": "2025-08-20 14:21:05",
+        "metric": "CI/CD",
+        "action": "Building Docker image",
+        "status": "STARTED",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-08-20 14:21:37",
+        "metric": "CI/CD",
+        "action": "Docker build",
+        "status": "SUCCESS",
+        "details": "Sending build context to Docker daemon   1.03GB\n\nStep 1/3 : FROM python:3.12-slim\n ---> bad5eac7befe\nStep 2/3 : WORKDIR /app\n ---> Using cache\n ---> 7afa802c0c75\nStep 3/3 : CMD [\"echo\", \"Neosilix test container running\"]\n ---> Using cache\n ---> 06acf6913155\nSuccessfully built 06acf6913155\nSuccessfully tagged neosilix-app:v1.0.0"
+    },
+    {
+        "timestamp": "2025-08-20 14:21:37",
+        "metric": "CI/CD",
+        "action": "Restarting container",
+        "status": "STARTED",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-08-20 14:21:38",
+        "metric": "CI/CD",
+        "action": "Docker restart",
+        "status": "SUCCESS",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-08-20 19:32:44",
+        "metric": "CI/CD",
+        "action": "Pulling latest code",
+        "status": "STARTED",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-08-20 19:32:44",
+        "metric": "CI/CD",
+        "action": "Pulled latest code",
+        "status": "FAILED",
+        "details": "fatal: unable to access 'https://github.com/Racheal-tech-21/Neosilix-UAIOps.git/': Could not resolve host: github.com"
+    },
+    {
+        "timestamp": "2025-08-20 19:32:44",
+        "metric": "CI/CD",
+        "action": "Building Docker image",
+        "status": "STARTED",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-08-20 19:33:37",
+        "metric": "CI/CD",
+        "action": "Docker build",
+        "status": "FAILED",
+        "details": "DEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\nThe command '/bin/sh -c apt-get update && apt-get install -y     curl     git     && rm -rf /var/lib/apt/lists/*' returned a non-zero code: 100"
+    },
+    {
+        "timestamp": "2025-08-20 19:33:37",
+        "metric": "CI/CD",
+        "action": "Restarting container",
+        "status": "STARTED",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-08-20 19:33:38",
+        "metric": "CI/CD",
+        "action": "Docker restart",
+        "status": "FAILED",
+        "details": "Network neosilix-uaiops_default  Creating\n Network neosilix-uaiops_default  Created\ntime=\"2025-08-20T19:33:38+02:00\" level=warning msg=\"Found orphan containers ([neosilix-app]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up.\"\n Container neosilix-api  Creating\n Container neosilix-api  Created\n Container neosilix-api  Starting\nError response from daemon: driver failed programming external connectivity on endpoint neosilix-api (d9e0a5028734aa16959f40bc33595a5e0733fb0639d8b8a97841419cada85be0): failed to bind port 0.0.0.0:5000/tcp: Error starting userland proxy: listen tcp4 0.0.0.0:5000: bind: address already in use"
+    },
+    {
+        "timestamp": "2025-08-20 19:33:38",
+        "metric": "CI/CD",
+        "action": "Rolling back",
+        "status": "STARTED",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-08-20 19:33:40",
+        "metric": "CI/CD",
+        "action": "Rollback completed",
+        "status": "FAILED",
+        "details": "Container neosilix-api  Stopping\n Container neosilix-api  Stopped\n Container neosilix-api  Removing\n Container neosilix-api  Removed\n Network neosilix-uaiops_default  Removing\n Network neosilix-uaiops_default  Removed\n Network neosilix-uaiops_default  Creating\n Network neosilix-uaiops_default  Created\ntime=\"2025-08-20T19:33:39+02:00\" level=warning msg=\"Found orphan containers ([neosilix-app]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up.\"\n Container neosilix-api  Creating\n Container neosilix-api  Created\n Container neosilix-api  Starting\nError response from daemon: driver failed programming external connectivity on endpoint neosilix-api (a149566ef1ed7d0ed4628287ef033a5c0f236c9259912f590f5f895d4116dff1): failed to bind port 0.0.0.0:5000/tcp: Error starting userland proxy: listen tcp4 0.0.0.0:5000: bind: address already in use"
+    }
+]

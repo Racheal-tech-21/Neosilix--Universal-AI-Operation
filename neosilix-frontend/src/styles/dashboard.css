@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.dashboard-container {
+  transition: all 0.3s ease;
+  background: linear-gradient(to bottom right, #7c3aed33, #ffffff22);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 25px rgba(124, 58, 237, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}

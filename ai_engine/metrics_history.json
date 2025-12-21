@@ -1,0 +1,142 @@
+[
+  {
+    "timestamp": "2025-11-25 16:38:22",
+    "metric_name": "network",
+    "value": 1.0111568201769008,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2025-11-25 16:49:48",
+    "metric_name": "network",
+    "value": 1.0124565972222221,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2025-11-25 17:10:33",
+    "metric_name": "network",
+    "value": 1.0124131944444443,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2025-11-25 19:12:34",
+    "metric_name": "network",
+    "value": 1.0158203124999998,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2025-11-25 19:24:18",
+    "metric_name": "network",
+    "value": 1.015625,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2025-11-25 19:35:12",
+    "metric_name": "network",
+    "value": 1.0182924161703923,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2025-11-25 19:45:55",
+    "metric_name": "network",
+    "value": 1.017533811748628,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2025-11-27 12:05:54",
+    "metric_name": "network",
+    "value": 1.0135633680555556,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2025-12-19 19:42:49",
+    "metric_name": "network",
+    "value": 1.0323567708333332,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2025-12-19 19:54:35",
+    "metric_name": "network",
+    "value": 1.0319444444444443,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2025-12-19 20:04:46",
+    "metric_name": "network",
+    "value": 1.0328571537700837,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2025-12-19 20:15:04",
+    "metric_name": "network",
+    "value": 1.0320963541666666,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2025-12-19 20:25:49",
+    "metric_name": "network",
+    "value": 1.0330040497300181,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2025-12-19 20:36:18",
+    "metric_name": "network",
+    "value": 1.0338324652777777,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2025-12-19 20:47:47",
+    "metric_name": "network",
+    "value": 1.035955241872764,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2025-12-20 07:01:10",
+    "metric_name": "network",
+    "value": 1.0249131944444443,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2025-12-20 07:12:06",
+    "metric_name": "network",
+    "value": 1.0226996527777776,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2025-12-20 07:22:25",
+    "metric_name": "network",
+    "value": 1.0822482638888886,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2025-12-20 07:32:54",
+    "metric_name": "network",
+    "value": 1.0236979166666667,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2025-12-20 07:43:23",
+    "metric_name": "network",
+    "value": 1.0254123263888888,
+    "user_id": null,
+    "website": null
+  }
+]

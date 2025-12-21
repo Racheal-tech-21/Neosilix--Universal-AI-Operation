@@ -1,0 +1,37 @@
+setuptools==68.2.2
+Flask
+PyJWT
+Werkzeug
+aiohttp
+asyncpg
+pandas
+scikit-learn
+prometheus-client
+numpy
+joblib
+psutil
+APScheduler
+# Add these to your existing requirements.txt
+
+# Core AI/ML Libraries
+torch>=2.0.0
+transformers>=4.30.0
+sentence-transformers>=2.2.0
+faiss-cpu>=1.7.4  # Use faiss-gpu if you have CUDA
+
+# NLP and Language Models
+tokenizers>=0.13.0
+huggingface-hub>=0.16.0
+
+# Additional ML utilities
+scikit-learn>=1.3.0
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Optional but recommended for better performance
+accelerate>=0.20.0  # Speeds up model loading
+bitsandbytes>=0.39.0  # For 8-bit quantization (optional)
+
+# If you want spaCy for advanced NLP (optional)
+spacy>=3.6.0
+#python -m spacy download en_core_web_sm

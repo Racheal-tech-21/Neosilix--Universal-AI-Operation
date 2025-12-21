@@ -1,0 +1,106 @@
+.logs-page-container {
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+  background: #0f172a;
+  min-height: 100vh;
+}
+
+.logs-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #334155;
+  padding-bottom: 1rem;
+}
+
+.logs-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.logs-card {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logs-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.logs-icon.yellow { color: #facc15; }
+.logs-icon.green { color: #22c55e; }
+.logs-icon.red { color: #ef4444; }
+
+.logs-table-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.logs-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #1e293b;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.logs-table th,
+.logs-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #334155;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.logs-table thead {
+  background-color: #0f172a;
+}
+
+.logs-table tr:hover {
+  background-color: #334155;
+}
+
+.badge {
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.badge.healed {
+  background-color: #10b981;
+  color: #fff;
+}
+
+.badge.anomaly {
+  background-color: #facc15;
+  color: #000;
+}
+
+.badge.critical {
+  background-color: #ef4444;
+  color: #fff;
+}
+
+.badge.normal {
+  background-color: #94a3b8;
+  color: #000;
+}
+
+.no-logs {
+  padding: 1rem;
+  background-color: #1e293b;
+  border-radius: 8px;
+  color: #9ca3af;
+}

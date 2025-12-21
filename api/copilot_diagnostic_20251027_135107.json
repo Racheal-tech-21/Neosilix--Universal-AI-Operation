@@ -1,0 +1,48 @@
+{
+  "checks": [
+    {
+      "check": "Flask Server",
+      "status": "PASS",
+      "message": "Server is running and responsive",
+      "timestamp": "2025-10-27T13:51:07.514787"
+    },
+    {
+      "check": "Authentication",
+      "status": "FAIL",
+      "message": "Login failed: 404",
+      "timestamp": "2025-10-27T13:51:07.518569"
+    },
+    {
+      "check": "Route Conflicts",
+      "status": "PASS",
+      "message": "No duplicate routes found",
+      "timestamp": "2025-10-27T13:51:07.521617"
+    },
+    {
+      "check": "Imports",
+      "status": "PASS",
+      "message": "No conflicting imports found",
+      "timestamp": "2025-10-27T13:51:07.522880"
+    },
+    {
+      "check": "Copilot Status",
+      "status": "FAIL",
+      "message": "API returned 401",
+      "timestamp": "2025-10-27T13:51:07.526302"
+    },
+    {
+      "check": "Chat Endpoint",
+      "status": "FAIL",
+      "message": "Endpoint returned 401",
+      "timestamp": "2025-10-27T13:51:07.529790"
+    }
+  ],
+  "errors": [
+    {
+      "error": "Chat Endpoint Error",
+      "message": "Details: {'message': 'Token is missing!'}",
+      "timestamp": "2025-10-27T13:51:07.529878"
+    }
+  ],
+  "fixes_applied": []
+}

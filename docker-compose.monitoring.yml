@@ -1,0 +1,110 @@
+version: '3.8'
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus:/etc/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-lifecycle'
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+    volumes:
+      - grafana_data:/var/lib/grafana
+    restart: unless-stopped
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    restart: unless-stopped
+
+  zabbix-postgres:
+    image: postgres:16
+    container_name: zabbix-postgres
+    environment:
+      - POSTGRES_USER=zabbix
+      - POSTGRES_PASSWORD=zabbix_2025
+      - POSTGRES_DB=zabbix
+      - POSTGRES_INITDB_ARGS=--auth-host=scram-sha-256
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - zabbix_postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U zabbix -d zabbix"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
+
+  zabbix-server:
+    image: zabbix/zabbix-server-pgsql:alpine-6.4-latest
+    container_name: zabbix-server
+    ports:
+      - "10051:10051"
+    environment:
+      - DB_SERVER_HOST=zabbix-postgres
+      - POSTGRES_USER=zabbix
+      - POSTGRES_PASSWORD=zabbix_2025
+      - POSTGRES_DB=zabbix
+    restart: unless-stopped
+    depends_on:
+      zabbix-postgres:
+        condition: service_healthy
+
+  zabbix-web:
+    image: zabbix/zabbix-web-nginx-pgsql:alpine-6.4-latest
+    container_name: zabbix-web
+    ports:
+      - "3001:8080"
+    environment:
+      - DB_SERVER_HOST=zabbix-postgres
+      - POSTGRES_USER=zabbix
+      - POSTGRES_PASSWORD=zabbix_2025
+      - POSTGRES_DB=zabbix
+      - ZBX_SERVER_HOST=zabbix-server
+      - PHP_TZ=UTC
+    restart: unless-stopped
+    depends_on:
+      - zabbix-postgres
+      - zabbix-server
+
+  zabbix-agent:
+    image: zabbix/zabbix-agent2:alpine-6.4-latest
+    container_name: zabbix-agent
+    ports:
+      - "10052:10050"
+    environment:
+      - ZBX_HOSTNAME=zabbix-server
+      - ZBX_SERVER_HOST=zabbix-server
+    restart: unless-stopped
+    depends_on:
+      - zabbix-server
+
+volumes:
+  grafana_data:
+  zabbix_postgres_data:
