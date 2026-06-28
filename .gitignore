@@ -76,3 +76,4 @@ logs/
 *.jsonl
 models/
 .env
+Humanoid github token.txt
