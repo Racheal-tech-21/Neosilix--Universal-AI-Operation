@@ -1,25 +1,7 @@
 {
   "user_id": 1,
-  "last_updated": "2025-12-19T21:34:18.757991",
+  "last_updated": "2026-06-28T18:54:28.357889",
   "history": [
-    {
-      "role": "user",
-      "content": "Analyze current CPU performance with neural networks",
-      "timestamp": "2025-11-01T18:27:37.613065",
-      "metadata": {
-        "question_type": "system_health",
-        "system_health": 67.85
-      }
-    },
-    {
-      "role": "assistant",
-      "content": "To analyze the current CPU performance using neural networks, we can follow these steps:\n\n1. Data Collection: Gather real-time CPU performance data such as usage levels, trends, and patterns.\n\n2. Data Preprocessing: Preprocess the collected data by cleaning, normalizing, and structuring it for neural network analysis.\n\n3. Neural Network Model Selection: Choose a suitable neural network architecture for time series data analysis, such as Long Short-Term Memory (LSTM) or a feedforward neural network.\n\n4. Model Training: Train the selected neural network model with the preprocessed CPU performance data to learn the patterns and relationships in the data.\n\n5. Prediction: Use the trained neural network model to predict future CPU performance based on the current data and historical patterns.\n\n6. Anomaly Detection: Utilize the neural network model to detect any anomalies or deviations in the CPU performance that may indicate potential issues.\n\n7. Performance Evaluation: Evaluate the performance of the neural network model by comparing its predictions with the actual CPU performance data.\n\nBy analyzing the current CPU performance with neural networks, we can gain insights into the system's behavior, predict future performance, and detect any abnormal patterns that may require attention or optimization.\n\nIf you would like to proceed with this analysis or have any specific requirements, feel free to provide more details or data inputs for a more tailored approach.",
-      "timestamp": "2025-11-01T18:27:37.644096",
-      "metadata": {
-        "processing_time": 37.259007,
-        "tokens_used": 1493
-      }
-    },
     {
       "role": "user",
       "content": "Optimize network performance using AI",
@@ -420,6 +402,18 @@
         "processing_time": "openai",
         "tokens_used": 385
       }
+    },
+    {
+      "role": "user",
+      "content": "Show me all monitoring targets",
+      "timestamp": "2026-06-28T18:54:28.346791",
+      "metadata": {}
+    },
+    {
+      "role": "assistant",
+      "content": "\ud83c\udfaf **MONITORING TARGETS**: 50% Health\n\u2022 Total: 4 | \u2705 Healthy: 2 | \u26a0\ufe0f Warning: 0 | \ud83d\udd34 Offline: 2\n\n\ud83d\udea8 **Critical Targets**:\n\u2022 zabbix-proxy - OFFLINE\n\u2022 Google Web Server - OFFLINE",
+      "timestamp": "2026-06-28T18:54:28.356866",
+      "metadata": {}
     }
   ]
 }

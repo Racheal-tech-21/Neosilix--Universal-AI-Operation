@@ -1,42 +1,7 @@
 {
   "user_id": 1,
-  "last_updated": "2025-11-24T08:37:58.962280",
+  "last_updated": "2026-04-09T10:59:21.415331",
   "history": [
-    {
-      "role": "user",
-      "content": "is it created?",
-      "timestamp": "2025-11-04T12:05:39.961911",
-      "metadata": {
-        "intent": "target_creation"
-      }
-    },
-    {
-      "role": "assistant",
-      "content": "\u274c I couldn't understand your target creation request.",
-      "timestamp": "2025-11-04T12:05:39.972338",
-      "metadata": {
-        "action": "target_creation",
-        "success": false
-      }
-    },
-    {
-      "role": "user",
-      "content": "hey",
-      "timestamp": "2025-11-04T13:10:51.759686",
-      "metadata": {
-        "question_type": "general_help",
-        "system_health": 74.4
-      }
-    },
-    {
-      "role": "assistant",
-      "content": "Hello! How can I assist you today?",
-      "timestamp": "2025-11-04T13:10:51.763628",
-      "metadata": {
-        "processing_time": "openai",
-        "tokens_used": 464
-      }
-    },
     {
       "role": "user",
       "content": "hi",
@@ -442,6 +407,30 @@
         "action": "target_creation",
         "success": false
       }
+    },
+    {
+      "role": "user",
+      "content": "Show me all monitoring targets",
+      "timestamp": "2026-04-09T10:58:21.359557",
+      "metadata": {}
+    },
+    {
+      "role": "assistant",
+      "content": "\ud83c\udfaf **MONITORING TARGETS**: 50% Health\n\u2022 Total: 4 | \u2705 Healthy: 2 | \u26a0\ufe0f Warning: 0 | \ud83d\udd34 Offline: 2\n\n\ud83d\udea8 **Critical Targets**:\n\u2022 zabbix-proxy - OFFLINE\n\u2022 Google Web Server - OFFLINE",
+      "timestamp": "2026-04-09T10:58:21.367367",
+      "metadata": {}
+    },
+    {
+      "role": "user",
+      "content": "What's my current system health?",
+      "timestamp": "2026-04-09T10:59:21.408824",
+      "metadata": {}
+    },
+    {
+      "role": "assistant",
+      "content": "\u26a1 **SYSTEM STATUS**: \ud83d\udd34 Critical\n\u2022 CPU: 94.6% | Memory: 39.6% | Disk: 55.5%\n\u2022 Alerts: 0 active\n\u2022 Zabbix: \u2705 Connected",
+      "timestamp": "2026-04-09T10:59:21.414246",
+      "metadata": {}
     }
   ]
 }
