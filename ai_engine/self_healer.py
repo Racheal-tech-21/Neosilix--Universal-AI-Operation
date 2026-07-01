@@ -269,7 +269,7 @@ def get_user_info(user_id):
         logging.error(f"Failed to fetch info for user {user_id}: {e}")
         return None
 
-def log_heal_event(metric, value, action_taken, user_id=None, website=None):
+def log_heal_event(metric, value, action_taken, user_id=None, website=None, target_id=None, improvement_percent=None):
     message = f"Healed [{metric.upper()}] anomaly. Value: {value}. Action: {action_taken}"
     if user_id:
         message += f" User ID: {user_id}"
@@ -277,6 +277,24 @@ def log_heal_event(metric, value, action_taken, user_id=None, website=None):
         message += f" Website: {website}"
     logging.info(message)
     print(message)
+
+    # Write to Postgres HealingLogs table so frontend can query real heal history
+    try:
+        import psycopg2
+        from api.app import DB_CONFIG
+        conn = psycopg2.connect(**DB_CONFIG)
+        cur = conn.cursor()
+        cur.execute(
+            """INSERT INTO healing_logs (anomaly_type, action_taken, status, details, improvement_percent, user_id, target_id, created_at)
+               VALUES (%s, %s, %s, %s, %s, %s, %s, NOW())""",
+            (metric, action_taken, 'completed', message, improvement_percent, user_id, target_id)
+        )
+        conn.commit()
+        cur.close()
+        conn.close()
+    except Exception as e:
+        print(f"[WARN] Could not write heal event to DB: {e}")
+
     send_email_alert(metric, value, action_taken, user_id, website)
 
 def cooldown_passed(metric_name):
@@ -378,7 +396,7 @@ def send_email_alert(metric, value, action_taken, user_id=None, website=None):
         logging.error(f"Failed to send email to {EMAIL_TO}: {e}")
 
 # === Healing logic ===
-def heal_anomaly(metric_name, value, timestamp, user_id=None, website=None):
+def heal_anomaly(metric_name, value, timestamp, user_id=None, website=None, target_id=None):
     if not cooldown_passed(metric_name):
         return
 
@@ -387,7 +405,7 @@ def heal_anomaly(metric_name, value, timestamp, user_id=None, website=None):
         # Try safe healing first
         safe_result = heal_cpu_anomaly_safe()
         if safe_result['success']:
-            log_heal_event("cpu_safe", value, "Used priority adjustment instead of killing", user_id, website)
+            log_heal_event("cpu_safe", value, "Used priority adjustment instead of killing", user_id, website, target_id=target_id, improvement_percent=safe_result.get("improvement"))
             return
         
         # Fallback to original method only if safe healing fails
@@ -399,9 +417,9 @@ def heal_anomaly(metric_name, value, timestamp, user_id=None, website=None):
             if proc.is_running() and proc.username() == psutil.Process().username():
                 try:
                     proc.kill()
-                    log_heal_event("cpu", value, f"Killed PID {proc.pid}", user_id, website)
+                    log_heal_event("cpu", value, f"Killed PID {proc.pid}", user_id, website, target_id=target_id)
                 except Exception as e:
-                    log_heal_event("cpu", value, f"Failed PID {proc.pid} - {e}", user_id, website)
+                    log_heal_event("cpu", value, f"Failed PID {proc.pid} - {e}", user_id, website, target_id=target_id)
 
     elif metric_name == "memory":
         processes = sorted(
@@ -411,30 +429,30 @@ def heal_anomaly(metric_name, value, timestamp, user_id=None, website=None):
         for proc in processes[:2]:
             try:
                 proc.kill()
-                log_heal_event("memory", value, f"Killed PID {proc.pid}", user_id, website)
+                log_heal_event("memory", value, f"Killed PID {proc.pid}", user_id, website, target_id=target_id)
             except Exception as e:
-                log_heal_event("memory", value, f"Failed PID {proc.pid} - {e}", user_id, website)
+                log_heal_event("memory", value, f"Failed PID {proc.pid} - {e}", user_id, website, target_id=target_id)
 
     elif metric_name == "disk":
         try:
             os.system("rm -rf /tmp/*")
-            log_heal_event("disk", value, "Cleared /tmp", user_id, website)
+            log_heal_event("disk", value, "Cleared /tmp", user_id, website, target_id=target_id)
         except Exception as e:
-            log_heal_event("disk", value, f"Failed /tmp clear - {e}", user_id, website)
+            log_heal_event("disk", value, f"Failed /tmp clear - {e}", user_id, website, target_id=target_id)
 
     elif metric_name == "network":
         try:
             os.system("sudo systemctl restart NetworkManager")
-            log_heal_event("network", value, "Restarted NetworkManager", user_id, website)
+            log_heal_event("network", value, "Restarted NetworkManager", user_id, website, target_id=target_id)
         except Exception as e:
-            log_heal_event("network", value, f"Failed network restart - {e}", user_id, website)
+            log_heal_event("network", value, f"Failed network restart - {e}", user_id, website, target_id=target_id)
 
     elif metric_name == "website":
         try:
             os.system("sudo systemctl restart apache2")
-            log_heal_event("website", value, "Restarted web service", user_id, website)
+            log_heal_event("website", value, "Restarted web service", user_id, website, target_id=target_id)
         except Exception as e:
-            log_heal_event("website", value, f"Failed website restart - {e}", user_id, website)
+            log_heal_event("website", value, f"Failed website restart - {e}", user_id, website, target_id=target_id)
 
     last_healed[metric_name] = time.time()
     save_metrics_history({

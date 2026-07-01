@@ -61,10 +61,12 @@ class HealingLogs(db.Model):
     action_taken = db.Column(db.String(500))
     status = db.Column(db.String(20), default='completed')
     details = db.Column(db.Text)
+    improvement_percent = db.Column(db.Float)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
-    # Foreign key
+    # Foreign keys
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    target_id = db.Column(db.Integer, db.ForeignKey('monitoring_targets.id'))
 
 # ================== TARGET MANAGEMENT MODELS ==================
 

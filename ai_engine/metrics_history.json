@@ -1,19 +1,5 @@
 [
   {
-    "timestamp": "2025-11-25 19:24:18",
-    "metric_name": "network",
-    "value": 1.015625,
-    "user_id": null,
-    "website": null
-  },
-  {
-    "timestamp": "2025-11-25 19:35:12",
-    "metric_name": "network",
-    "value": 1.0182924161703923,
-    "user_id": null,
-    "website": null
-  },
-  {
     "timestamp": "2025-11-25 19:45:55",
     "metric_name": "network",
     "value": 1.017533811748628,
@@ -136,6 +122,20 @@
     "timestamp": "2026-06-28 20:43:47",
     "metric_name": "network",
     "value": 1.0307942708333333,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2026-06-29 14:27:26",
+    "metric_name": "network",
+    "value": 1.0526258680555556,
+    "user_id": null,
+    "website": null
+  },
+  {
+    "timestamp": "2026-07-01 00:02:45",
+    "metric_name": "network",
+    "value": 1.031032986111111,
     "user_id": null,
     "website": null
   }

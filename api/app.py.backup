@@ -30,7 +30,7 @@ from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
 # Database imports
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
-from models import db, User, Website, Metric, MonitoringTarget, TargetService, TargetMetric, HealingLogs
+from models import db, User, Website, Metric, MonitoringTarget, TargetService, TargetMetric
 
 # AI Engine imports
 from sklearn.ensemble import IsolationForest
@@ -63,7 +63,7 @@ except ImportError:
 
 import redis
 from dotenv import load_dotenv
-from models import User, Website, Metric, MonitoringTarget, TargetService, TargetMetric, HealingLogs
+from models import User, Website, Metric, MonitoringTarget, TargetService, TargetMetric
 
 
 # Load environment variables
@@ -7393,17 +7393,6 @@ def get_target_live_metrics(target_id):
                         'network_sent_mb': round(net.bytes_sent / (1024**2), 2),
                         'process_count': len(psutil.pids()),
                         'uptime_seconds': int(time.time() - psutil.boot_time()),
-                        'load_avg_1m': round(psutil.getloadavg()[0], 2),
-                        'load_avg_5m': round(psutil.getloadavg()[1], 2),
-                        'load_avg_15m': round(psutil.getloadavg()[2], 2),
-                        'swap_percent': round(psutil.swap_memory().percent, 1),
-                        'swap_used_gb': round(psutil.swap_memory().used / (1024**3), 2),
-                        'swap_total_gb': round(psutil.swap_memory().total / (1024**3), 2),
-                        'memory_cached_gb': round(psutil.virtual_memory().cached / (1024**3), 2),
-                        'memory_available_gb': round(psutil.virtual_memory().available / (1024**3), 2),
-                        'disk_io_read_mb': round(psutil.disk_io_counters().read_bytes / (1024**2), 2),
-                        'disk_io_write_mb': round(psutil.disk_io_counters().write_bytes / (1024**2), 2),
-                        'tcp_connections': len([c for c in psutil.net_connections() if c.status == 'ESTABLISHED']),
                     })
                 except Exception as e:
                     metrics['psutil_error'] = str(e)
@@ -7477,14 +7466,6 @@ def get_target_live_metrics(target_id):
                         'container_name': matched.name,
                         'restart_count': matched.attrs.get('RestartCount', 0),
                         'image': matched.image.tags[0] if matched.image.tags else 'unknown',
-                        'oom_killed': matched.attrs.get('State', {}).get('OOMKilled', False),
-                        'exit_code': matched.attrs.get('State', {}).get('ExitCode', 0),
-                        'health_status': matched.attrs.get('State', {}).get('Health', {}).get('Status', 'none'),
-                        'started_at': matched.attrs.get('State', {}).get('StartedAt'),
-                        'port_mappings': {
-                            k: [b.get('HostPort') for b in v] if v else []
-                            for k, v in (matched.attrs.get('NetworkSettings', {}).get('Ports', {}) or {}).items()
-                        },
                     })
                     
                     net = stats.get('networks', {})
@@ -7534,54 +7515,4 @@ def get_target_live_metrics(target_id):
 
     except Exception as e:
         print(f"[ERROR] live-metrics for target {target_id}: {e}")
-        return jsonify({'error': str(e)}), 500
-
-
-# ================== HEAL HISTORY PER TARGET ==================
-@app.route('/api/targets/<int:target_id>/heal-history', methods=['GET'])
-@token_required
-def get_target_heal_history(target_id):
-    try:
-        target = MonitoringTarget.query.filter_by(
-            id=target_id, user_id=request.user_id
-        ).first()
-        
-        if not target:
-            return jsonify({'error': 'Target not found'}), 404
-
-        # Get REAL heal events from HealingLogs table, linked by target_id
-        heal_logs = HealingLogs.query.filter_by(
-            target_id=target_id
-        ).order_by(HealingLogs.created_at.desc()).limit(15).all()
-
-        heal_events = [{
-            'timestamp': h.created_at.isoformat() if h.created_at else None,
-            'metric': h.anomaly_type,
-            'action_taken': h.action_taken,
-            'status': h.status,
-            'improvement_percent': h.improvement_percent,
-        } for h in heal_logs]
-
-        # Get last 20 metrics for uptime calculation
-        recent_metrics = TargetMetric.query.filter_by(
-            target_id=target_id
-        ).order_by(TargetMetric.recorded_at.desc()).limit(20).all()
-
-        total = len(recent_metrics)
-        healthy = len([m for m in recent_metrics if m.value and m.value < 500])
-        uptime_pct = round((healthy/total)*100, 1) if total > 0 else 100.0
-
-        return jsonify({
-            'target_id': target_id,
-            'target_name': target.name,
-            'heal_events': heal_events,
-            'total_heals': len(heal_logs),
-            'total_scans': total,
-            'uptime_percent': uptime_pct,
-            'last_status': target.status,
-            'timestamp': datetime.now().isoformat()
-        }), 200
-
-    except Exception as e:
-        print(f"[ERROR] heal-history for target {target_id}: {e}")
         return jsonify({'error': str(e)}), 500
